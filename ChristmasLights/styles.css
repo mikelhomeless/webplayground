@@ -1,0 +1,125 @@
+body {
+    background: #111;
+    margin: 0;
+}
+
+h2 {
+    color: #fff;
+    position: relative;
+    margin-top: 200px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    font-size: 4em;
+    text-shadow: 0px 0px 8px rgba(255,65,185,1);
+}
+
+#wire {
+    text-align: center;
+    position:absolute;
+    padding: 0;
+    width: 100%;
+    top: -80px;
+    border-bottom: 3px solid #222;
+    height: 100px;
+}
+
+#wire li {
+    position: relative;
+    list-style: none;
+    margin: 0 15px;
+    padding: 0;
+    display: inline-block;
+    width: 15px;
+    height: 30px;
+    border-radius: 50%;
+    top: 102px;
+    background: #fff;
+    /* animation stuff here */
+    animation-name: green-flash;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+#wire li:hover {
+    cursor: pointer;
+}
+
+/* #wire li:nth-child(odd){
+    top: 75px;
+} */
+
+#wire li:nth-child(3n+2) {
+    animation-name: red-flash;
+    animation-delay: 1.33s;
+}
+
+/* #wire li:nth-child(4n+3) {
+    animation-name: magenta-flash;
+} */
+
+#wire li:nth-child(3n) {
+    animation-name: yellow-flash;
+    animation-delay: 2.66s;
+}
+
+
+#wire li::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 10px;
+    border-radius: 4px;
+    top: -5px;
+    left: 0;
+    background: #444;
+}
+
+/* #wire li:nth-child(odd)::before {
+    top: 22px
+} */
+
+@keyframes yellow-flash {
+    0%, 100% {
+        background: rgba(255, 230, 65, 1);
+        box-shadow: 0px 2px 20px 4px rgba(255,230,65,1);
+    }
+    50% {
+        background: rgba(255, 230, 65, 0.5);
+        box-shadow: 0px 2px 20px 4px rgba(255,230,65,0.3);
+    }
+}
+
+@keyframes red-flash {
+    0%, 100% {
+        background: rgb(255, 65, 65);
+        box-shadow: 0px 2px 20px 4px rgba(255, 65, 65,1);
+    }
+    50% {
+        background: rgba(255, 65, 65, 0.5);
+        box-shadow: 0px 2px 20px 4px rgba(255, 65, 65,0.3);
+    }
+}
+
+@keyframes magenta-flash {
+    0%, 100% {
+        background: rgb(65, 68, 255);
+        box-shadow: 0px 2px 20px 4px rgba(65, 68, 255,1);
+    }
+    50% {
+        background: rgba(65, 68, 255, 0.5);
+        box-shadow: 0px 2px 20px 4px rgba(65, 68, 255,0.3);
+    }
+}
+
+
+@keyframes green-flash {
+    0%, 100% {
+        background: rgb(36, 153, 0);
+        box-shadow: 0px 2px 20px 4px rgba(36, 153, 0, 1);
+    }
+    50% {
+        background: rgba(36, 153, 0, 0.5);
+        box-shadow: 0px 2px 20px 4px rgba(36, 153, 0, 0.3);
+    }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="styles.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function listenToTextInput(event) {
+        }
+
+        function addChipsToInput(chip) {
+            var input = document.getElementById("text-input");
+
+            var tokenChip = document.createElement("span");
+            tokenChip.className = "chip text-input-chip";
+            tokenChip.setAttribute('contenteditable', false);
+            tokenChip.setAttribute('data-token', chip.dataset.value);
+            tokenChip.innerHTML = chip.dataset.value;
+
+            var paragraphs = input.querySelectorAll('p');
+            var lastParagraph = paragraphs[paragraphs.length - 1];
+            lastParagraph.appendChild(tokenChip);
+
+            input.focusInput();
+        }
+
+        function focusInput(element) {
+            let inputArea;
+            for (const child of element.children) {
+                if (child.hasAttribute('contenteditable')) {
+                    inputArea = child;
+                }
+            }
+
+            inputArea.focus();
+        }
+
+        function onTextAreaInput(element) {
+            console.log('hello');
+            if (!element.innerText.trim()){
+                var paragraph = document.createElement('p');
+                var placeholder = document.createElement('span');
+                placeholder.className = 'placeholder-decoration';
+                placeholder.setAttribute('contenteditable', false);
+                placeholder.innerHTML = 'Placeholder Text goes here';
+                paragraph.appendChild(placeholder);
+
+                element.innerHTML = '';
+                element.appendChild(paragraph);
+            }
+            else {
+                var placeholderSpan = element.querySelector('p .placeholder-decoration');
+                if (placeholderSpan) {
+                    placeholderSpan.remove();
+                }
+            }
+        }
+    </script>
+    <div>
+        <div class="editor-container" onclick="focusInput(this)">
+            <div contenteditable="true" id="text-input" oninput="onTextAreaInput(this)">
+                <p><span contenteditable="false" class="placeholder-decoration">Placeholder Text goes here</span></p>
+            </div>
+        </div>
+
+        <div id="chip-container">
+            <div class="chip" data-value="{{Patient.FirstName}}" onclick="addChipsToInput(this)">
+                Patient First Name
+            </div>
+            <div class="chip" data-value="{{Patient.LastName}}" onclick="addChipsToInput(this)">
+                Patient Last Name
+            </div>
+            <div class="chip" data-value="{{Program.Name}}" onclick="addChipsToInput(this)">
+                Program name
+            </div>
+            <div class="chip" data-value="{{*}}" onclick="addChipsToInput(this)">
+                Free Text
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
